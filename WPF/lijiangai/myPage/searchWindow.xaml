@@ -1,0 +1,124 @@
+﻿<Window x:Class="AIVisualwfpnew.myPage.searchWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:bh="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:bhv="http://schemas.microsoft.com/expression/2010/interactions"
+        xmlns:at="clr-namespace:AIVisualwfpnew.resources"
+        xmlns:localbh="clr-namespace:AIVisualwfpnew.Behaviors"
+        xmlns:local="clr-namespace:AIVisualwfpnew.myPage"
+        xmlns:controls="clr-namespace:AIVisualwfpnew.Controlers"
+        xmlns:vm="clr-namespace:AIVisualwfpnew.ViewModle"
+        xmlns:ct="clr-namespace:AIVisualwfpnew.Converters"
+        mc:Ignorable="d"
+        WindowStyle="None"   
+        AllowsTransparency="True" 
+        x:Name="win"
+        Title="searchWindow" Height="800" Width="900">
+    <Window.Resources>
+        <ct:InvasionTypeConverter x:Key="invasionTypeCT"></ct:InvasionTypeConverter>
+    </Window.Resources>
+    <bh:Interaction.Behaviors>
+        <localbh:EventToCommandBehavior Event="Loaded" PassSender="True" Command="{Binding LoadedHandler}"></localbh:EventToCommandBehavior>
+    </bh:Interaction.Behaviors>
+    <Window.DataContext>
+        <vm:SearchWindowVM></vm:SearchWindowVM>
+    </Window.DataContext>
+    <AdornerDecorator>
+        <Grid>
+            <Grid.Background>
+                <ImageBrush ImageSource="..\resources\image\searchwindowbgtwo.png"></ImageBrush>
+            </Grid.Background>
+            <Grid Margin="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40"></RowDefinition>
+                    <RowDefinition Height="40"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="40"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid x:Name="btntitle" Grid.Row="0" Margin="5"   VerticalAlignment="Bottom">
+                    <Grid.Background>
+                        <ImageBrush ImageSource="..\resources\image\searchtop.png"></ImageBrush>
+                    </Grid.Background>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="50"></ColumnDefinition>
+                        <ColumnDefinition Width="50"></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition Width="50"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Image Grid.Column="0" Source="..\resources\image\searchicontop.png"  Margin="3"></Image>
+                    <Label Grid.Column="1" Content="查询" Foreground="White" Margin="3"></Label>
+
+                    <Image x:Name="searchwindowclose" Grid.Column="3" Source="..\resources\image\searchwindowclose.png" Margin="10"></Image>
+                </Grid>
+                <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="15,0">
+                    <StackPanel.Resources>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="Foreground" Value="White"></Setter>
+                            <Setter Property="FontFamily" Value="MicrosoftYaHei"></Setter>
+                            <Setter Property="FontSize" Value="14"></Setter>
+                            <Setter Property="VerticalAlignment" Value="Center"></Setter>
+                            <Setter Property="FontWeight" Value="Normal"></Setter>
+                        </Style>
+                        <Style TargetType="{x:Type TextBox}">
+                            <Setter Property="MinWidth" Value="150"></Setter>
+                            <Setter Property="VerticalAlignment" Value="Center"></Setter>
+                            <Setter Property="MinHeight" Value="23"></Setter>
+                            <Setter Property="Background" Value="Transparent"></Setter>
+                            <Setter Property="Foreground" Value="White"></Setter>
+                            <Setter Property="BorderThickness" Value="1"></Setter>
+                            <Setter Property="BorderBrush" Value="#2ED5FF"></Setter>
+                            <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
+                            <Setter Property="CaretBrush" Value="White"></Setter>
+                        </Style>
+
+                        <Style TargetType="{x:Type controls:DatePicker}">
+                            <Setter Property="VerticalAlignment" Value="Center"></Setter>
+                            <Setter Property="Height" Value="23"></Setter>
+                        </Style>
+                    </StackPanel.Resources>
+                    <TextBlock Text="地点："></TextBlock>
+                    <!--<TextBox at:AttachPropertys.Placeholder="请输入地址"></TextBox>-->
+                    <ComboBox Style="{StaticResource WpfComboBoxStyle}" ItemsSource="{Binding PositionSource}" DisplayMemberPath="PositionName" SelectedValuePath="ID" SelectedValue="{Binding SelectedPositionID}">
+                    </ComboBox>
+                    <TextBlock Text="时间：" Margin="25,0,0,0"></TextBlock>
+                    <controls:DatePicker x:Name="startdate" Date="{Binding StartDate}" EndDate="{Binding ElementName=EndDate, Path=Date}"></controls:DatePicker>
+                    <TextBlock Text=" - " Margin="7,0"></TextBlock>
+                    <controls:DatePicker x:Name="EndDate" StartDate="{Binding ElementName=startdate,Path=Date}" Date="{Binding EndDate}" EndDate="{Binding ElementName=EndDate,Path=Date}"></controls:DatePicker>
+                    <TextBlock Text="种类：" Margin="15,0,0,0"></TextBlock>
+                    <ComboBox Style="{StaticResource WpfComboBoxStyle}" ItemsSource="{Binding Category}" DisplayMemberPath="DisplayName" SelectedValuePath="CategroyId" SelectedValue="{Binding SelectedCategory}">
+                    </ComboBox>
+                    <Button VerticalAlignment="Center" Command="{Binding SearchCommand}" Style="{StaticResource SearchButtonStyle}" Margin="15,0" Content="查询"></Button>
+                </StackPanel>
+                <DataGrid x:Name="dg" Margin="10,0" ItemsSource="{Binding DataGridSources}" Grid.Row="2">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="序号" Binding="{Binding ID}"></DataGridTextColumn>
+                        <DataGridTextColumn Header="时间" Binding="{Binding Invasiontime}"></DataGridTextColumn>
+                        <DataGridTextColumn Header="地址" Binding="{Binding PositionName}"></DataGridTextColumn>
+                        <DataGridTextColumn Header="入侵体种类" Binding="{Binding IntrudeCatogroy,Converter={StaticResource invasionTypeCT}}"></DataGridTextColumn>
+                        <DataGridTemplateColumn Header="入侵抓图">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Content="{Binding PictrueUrl}" Style="{StaticResource linkBtn}" at:AttachPropertys.Image="/resources/image/search_img.png" Command="{Binding DataContext.ShowImageCommand,RelativeSource={RelativeSource AncestorLevel=1,Mode=FindAncestor,AncestorType={x:Type local:searchWindow}}}" CommandParameter="{Binding .}"></Button>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="入侵视频流">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Content="{Binding VideoUrl}" Style="{StaticResource linkBtn}" at:AttachPropertys.Image="/resources/image/search_video.png" Command="{Binding DataContext.ShowVideoCommand,RelativeSource={RelativeSource AncestorLevel=1,Mode=FindAncestor,AncestorType={x:Type local:searchWindow}}}" CommandParameter="{Binding .}"></Button>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+                <controls:PagerControl Grid.Row="3" HorizontalAlignment="Right" VerticalAlignment="Center" TotalDataCount="{Binding DataContext.TotalDataCount,RelativeSource={RelativeSource AncestorLevel=1,Mode=FindAncestor,AncestorType={x:Type local:searchWindow}}}" PageSize="20">
+                    <bh:Interaction.Behaviors>
+                        <localbh:EventToCommandBehavior Event="Pagenation" PassArguments="True" Command="{Binding DataContext.PageNationCommand,RelativeSource={RelativeSource AncestorLevel=1,Mode=FindAncestor,AncestorType={x:Type local:searchWindow}}}"></localbh:EventToCommandBehavior>
+                    </bh:Interaction.Behaviors>
+                </controls:PagerControl>
+            </Grid>
+        </Grid>
+    </AdornerDecorator>
+</Window>

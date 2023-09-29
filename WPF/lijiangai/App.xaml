@@ -1,0 +1,23 @@
+﻿<Application x:Class="AIVisualwfpnew.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:AIVisualwfpnew"
+             StartupUri="MainWindow.xaml">
+    <!--StartupUri="MainWindow.xaml"     Windows/VideoViewWindow.xaml    Windows/PaintingAreaWindow.xaml  -->
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/resources/SliderStyles.xaml"/>
+                <ResourceDictionary Source="/resources/CheckBoxStyle.xaml"/>
+                <ResourceDictionary Source="/resources/Style.Calendar.xaml"/>
+                <ResourceDictionary Source="/resources/Dictionary.xaml"> </ResourceDictionary>
+                <ResourceDictionary Source="/resources/ButtonStyle.xaml"/>
+                <ResourceDictionary Source="/resources/ScrollViewerStyle.xaml"/>
+                <ResourceDictionary Source="/resources/DataGridStyles.xaml"/>
+                <ResourceDictionary Source="/resources/WindowStyles.xaml"/>
+                <ResourceDictionary Source="/Controlers/RangeSlider.xaml"/>
+                <ResourceDictionary Source="/Controlers/TimeEditer.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

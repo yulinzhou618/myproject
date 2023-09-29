@@ -1,0 +1,93 @@
+﻿<UserControl x:Class="AIVisualwfpnew.Controlers.PagerControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:AIVisualwfpnew.Controlers"
+             mc:Ignorable="d" >
+    <UserControl.Resources>
+        <Style TargetType="{x:Type TextBlock}">
+            <Setter Property="Foreground" Value="#97C1E1"></Setter>
+        </Style>
+
+        <Style TargetType="{x:Type Button}">
+            <Setter Property="BorderBrush" Value="#2ED5FF"></Setter>
+            <Setter Property="Background" Value="Transparent"></Setter>
+            <Setter Property="BorderThickness" Value="1"></Setter>
+            <Setter Property="HorizontalContentAlignment" Value="Center"></Setter>
+            <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
+            <Setter Property="Cursor" Value="Hand"></Setter>
+            <Setter Property="Width" Value="26"></Setter>
+            <Setter Property="Height" Value="26"></Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="2">
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="ItemBtn" TargetType="{x:Type Button}">
+            <Setter Property="BorderBrush" Value="#2ED5FF"></Setter>
+            <Setter Property="Background" Value="Transparent"></Setter>
+            <Setter Property="BorderThickness" Value="1"></Setter>
+            <Setter Property="HorizontalContentAlignment" Value="Center"></Setter>
+            <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
+            <Setter Property="Foreground" Value="#87BDCD"></Setter>
+            <Setter Property="FontSize" Value="14"></Setter>
+            <Setter Property="Cursor" Value="Hand"></Setter>
+            <Setter Property="Width" Value="26"></Setter>
+            <Setter Property="Height" Value="26"></Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="2">
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="local:PagerControl.IsSelectedItemBtn" Value="True">
+                                <Setter Property="Background" Value="#2ED5FF"></Setter>
+                                <Setter Property="Foreground" Value="White"></Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+    <StackPanel Orientation="Horizontal">
+        <TextBlock VerticalAlignment="Center">
+            <Run>共</Run>
+            <Run Text="{Binding TotalPage}"></Run>
+            <Run>页</Run>
+        </TextBlock>
+        
+        <Button Margin="10,0,0,0" Command="{Binding PageUpCommand}">
+            <Image Source="/resources/image/pageUp.png"></Image>
+        </Button>
+        
+        <ItemsControl Margin="10,0,0,0" ItemsSource="{Binding PageButtons}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Horizontal"></WrapPanel>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Button Content="{Binding Index}" Margin="5,0" Command="{Binding PageItemClick,RelativeSource={RelativeSource AncestorLevel=1,Mode=FindAncestor,AncestorType={x:Type local:PagerControl}}}" CommandParameter="{Binding Index}" Style="{StaticResource ItemBtn}" local:PagerControl.IsSelectedItemBtn="{Binding IsSelected}"></Button>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+        
+        <Button Margin="10,0,0,0" Command="{Binding PageDownCommand}">
+            <Image Source="/resources/image/pageDown.png"></Image>
+        </Button>
+        <TextBlock Text="转到" Margin="10,0,0,0" VerticalAlignment="Center"></TextBlock>
+        <TextBox Margin="10,0,0,0" MaxLength="9" Width="50" Height="26" VerticalAlignment="Center" Background="Transparent" BorderBrush="#2ED5FF" BorderThickness="1" Foreground="White" CaretBrush="White" KeyDown="TextBox_KeyDown">
+        </TextBox>
+        <TextBlock Text="页" Margin="10,0,0,0" VerticalAlignment="Center"></TextBlock>
+    </StackPanel>
+</UserControl>

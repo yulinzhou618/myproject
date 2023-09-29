@@ -1,0 +1,570 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{05583C6A-A121-46E6-BC50-4805ABC36651}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>AIVisualwfpnew</RootNamespace>
+    <AssemblyName>AIVisualwfpnew</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>lijiangyougui.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="log4net, Version=2.0.15.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>packages\log4net.2.0.15\lib\net45\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Expression.Interactions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\System.Windows.Interactivity.WPF.2.0.20525\lib\net40\Microsoft.Expression.Interactions.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationFramework.Aero2" />
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\System.Windows.Interactivity.WPF.2.0.20525\lib\net40\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="WindowsFormsIntegration" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="Adorners\PlaceholderAdorner.cs" />
+    <Compile Include="Behaviors\EventToCommandBehavior.cs" />
+    <Compile Include="CommunicationMsg\ConfigPositionInvasionZoneInfo.cs" />
+    <Compile Include="CommunicationMsg\GetImageStream.cs" />
+    <Compile Include="CommunicationMsg\InvasionSearch.cs" />
+    <Compile Include="CommunicationMsg\Login.cs" />
+    <Compile Include="CommunicationMsg\PushMsg\PushHeaderEntity.cs" />
+    <Compile Include="CommunicationMsg\PushMsg\ReceivedMessageEntity.cs" />
+    <Compile Include="Controlers\PagerControl.xaml.cs">
+      <DependentUpon>PagerControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controlers\RangeSlider.xaml.cs">
+      <DependentUpon>RangeSlider.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controlers\TimeEditer.xaml.cs">
+      <DependentUpon>TimeEditer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controlers\TimeInput.xaml.cs">
+      <DependentUpon>TimeInput.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Converters\BooleanReversalToVisibilityConverter.cs" />
+    <Compile Include="Converters\BoolReversal.cs" />
+    <Compile Include="Converters\Object2StringConverter.cs" />
+    <Compile Include="Converters\TimeSpan2StringConverter.cs" />
+    <Compile Include="Entitys\PositionInvasionConfigInfo.cs" />
+    <Compile Include="Helpers\Extensions.cs" />
+    <Compile Include="Helpers\SpeakerHelper.cs" />
+    <Compile Include="Helpers\UIHelper.cs" />
+    <Compile Include="myClass\Client.cs" />
+    <Compile Include="myPage\cameraPage1.xaml.cs">
+      <DependentUpon>cameraPage1.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="myPage\cameraPage2.xaml.cs">
+      <DependentUpon>cameraPage2.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="myPage\cameraPage3.xaml.cs">
+      <DependentUpon>cameraPage3.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="myPage\cameraPage4.xaml.cs">
+      <DependentUpon>cameraPage4.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="myPage\cameraPage5.xaml.cs">
+      <DependentUpon>cameraPage5.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="myPage\cameraPage6.xaml.cs">
+      <DependentUpon>cameraPage6.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="myPage\cameraPageNVR.xaml.cs">
+      <DependentUpon>cameraPageNVR.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="myPage\cameraPageView.xaml.cs">
+      <DependentUpon>cameraPageView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\ImageViewWindow.xaml.cs">
+      <DependentUpon>ImageViewWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Helpers\LogHelper.cs" />
+    <Compile Include="Helpers\PushManager.cs" />
+    <Compile Include="CommunicationMsg\PushMsg\PushType.cs" />
+    <Compile Include="Controlers\DatePicker.xaml.cs">
+      <DependentUpon>DatePicker.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Converters\DateTimeAdjustConverter.cs" />
+    <Compile Include="Converters\InvasionTypeConverter.cs" />
+    <Compile Include="Entitys\Intrude.cs" />
+    <Compile Include="Entitys\PositionInfo.cs" />
+    <Compile Include="Helpers\ByteUtil.cs" />
+    <Compile Include="Helpers\GlobalConfig.cs" />
+    <Compile Include="Helpers\JsonContent.cs" />
+    <Compile Include="Helpers\PushClient.cs" />
+    <Compile Include="resources\AttachPropertys.cs" />
+    <Compile Include="resources\WindowStyles.xaml.cs">
+      <DependentUpon>WindowStyles.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModle\SearchWindowVM.cs" />
+    <Compile Include="ViewModle\ViewModleBase.cs" />
+    <Compile Include="Windows\NewTimeSettingWindow.xaml.cs">
+      <DependentUpon>NewTimeSettingWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\PaintingAreaWindow.xaml.cs">
+      <DependentUpon>PaintingAreaWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\TimeSettingWindow.xaml.cs">
+      <DependentUpon>TimeSettingWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\VideoViewWindow.xaml.cs">
+      <DependentUpon>VideoViewWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\WarningHandle.xaml.cs">
+      <DependentUpon>WarningHandle.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Controlers\DatePicker.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controlers\PagerControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controlers\RangeSlider.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controlers\TimeEditer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controlers\TimeInput.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="myPage\cameraPage1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="myPage\cameraPage2.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="myPage\cameraPage3.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="myPage\cameraPage4.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="myPage\cameraPage5.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="myPage\cameraPage6.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="myPage\cameraPageNVR.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="myPage\cameraPageView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="resources\CheckBoxStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="resources\SliderStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\ImageViewWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="resources\ButtonStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="resources\DataGridStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="myPage\loginPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="myPage\mainPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="myPage\oneCameraPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="myPage\searchWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="myPage\sixCameraPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="resources\Dictionary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="resources\ScrollViewerStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="resources\Style.Calendar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="resources\WindowStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\NewTimeSettingWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\PaintingAreaWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\TimeSettingWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\VideoViewWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\WarningHandle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="myClass\data.cs" />
+    <Compile Include="myClass\RelayCommand.cs" />
+    <Compile Include="myClass\videoClient.cs" />
+    <Compile Include="myPage\loginPage.xaml.cs">
+      <DependentUpon>loginPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="myPage\mainPage.xaml.cs">
+      <DependentUpon>mainPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="myPage\mainPageViewModel.cs" />
+    <Compile Include="myPage\oneCameraPage.xaml.cs">
+      <DependentUpon>oneCameraPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="myPage\searchWindow.xaml.cs">
+      <DependentUpon>searchWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="myPage\sixCameraPage.xaml.cs">
+      <DependentUpon>sixCameraPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Resource Include="resources\image\WarningHandle\light.png" />
+    <Resource Include="resources\image\WarningHandle\left.png" />
+    <Resource Include="resources\image\WarningHandle\left_hover.png" />
+    <Resource Include="resources\image\WarningHandle\right.png" />
+    <Resource Include="resources\image\WarningHandle\right_hover.png" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="log4net.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="packages.config" />
+    <None Include="Properties\app.manifest" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="resources\image\main.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="resources\image\videonone.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="resources\image\topcenter.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="resources\image\logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="resources\image\close.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="resources\image\max.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="resources\image\minim.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="resources\image\loginout.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="resources\image\topbg.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="resources\image\minimenter.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="resources\image\maxenter.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="resources\image\closeenter.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="resources\image\logoutenter.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="resources\image\alarmnone.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="resources\image\voice.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="resources\image\sensor.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="resources\image\video.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="resources\image\mainlefttopbg.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="resources\image\mainleftbottombg.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="resources\image\mainleftbg.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="resources\image\alarmsound.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="resources\image\splitline.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="resources\image\title.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="resources\image\videobg.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="resources\image\videobg2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="resources\image\down.png" />
+    <Resource Include="resources\image\up.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="resources\image\normal.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="resources\image\normalenter.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="resources\image\camerabg.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="resources\image\maxnormalminium.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="resources\image\loginpage.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="resources\image\loginbg.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="resources\image\loginearth.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="resources\image\loginbgright.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="resources\image\userloginword.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="resources\image\loginboxbg.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="resources\image\loginbtn.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="resources\image\yonghuming.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="resources\image\ai-password.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="resources\image\loginbtnfresh.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="resources\image\searchbg.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="resources\image\searchicon.png" />
+    <Resource Include="resources\image\seticon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="resources\image\searchWindowBg.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="resources\image\searchtop.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="resources\image\searchicontop.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="resources\image\searchwindowclose.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="resources\image\searchwindowbgtwo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="resources\image\datagridSelectedBG.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="resources\image\datagridheaderbg.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="resources\image\pageDown.png" />
+    <Resource Include="resources\image\pageUp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="resources\image\search_img.png" />
+    <Resource Include="resources\image\search_video.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="resources\image\WindowBase\img.png" />
+    <Resource Include="resources\image\WindowBase\closebtn.png" />
+    <Resource Include="resources\image\WindowBase\bg.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="resources\videoview\train.png" />
+    <Resource Include="resources\videoview\pause_big.png" />
+    <Resource Include="resources\videoview\play_small.png" />
+    <Resource Include="resources\videoview\pause_small.png" />
+    <Resource Include="resources\videoview\play_big.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="resources\image\paintingarea\icon.png" />
+    <Resource Include="resources\image\paintingarea\left.png" />
+    <Resource Include="resources\image\paintingarea\right.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="resources\image\TimeSetting\Icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="resources\image\TimeSetting\sliderthumb.png" />
+    <Resource Include="resources\image\TimeSetting\3683.png" />
+    <Resource Include="resources\image\TimeSetting\sliderbg.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="resources\image\TimeSetting\btndefault.png" />
+    <Resource Include="resources\image\TimeSetting\btnpress.png" />
+    <Resource Include="resources\image\TimeSetting\btnmouseover.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="resources\image\TimeSetting\timeinputbg.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="resources\image\mainwindow\voicewhite.png" />
+    <Resource Include="resources\image\mainwindow\voicedisable.png" />
+    <Resource Include="resources\image\mainwindow\btnbg01.png" />
+    <Resource Include="resources\image\mainwindow\btnbg02.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="lijiangyougui.ico" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

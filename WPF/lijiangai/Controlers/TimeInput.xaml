@@ -1,0 +1,46 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:AIVisualwfpnew.Controlers">
+    <Style TargetType="{x:Type TextBox}" x:Key="TimeInputTextBox">
+        <Setter Property="Background" Value="Transparent"></Setter>
+        <Setter Property="BorderBrush" Value="Transparent"></Setter>
+        <Setter Property="BorderThickness" Value="0"></Setter>
+        <Setter Property="CaretBrush" Value="White"></Setter>
+        <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
+        <Setter Property="HorizontalContentAlignment" Value="Center"></Setter>
+    </Style>
+    
+    <Style TargetType="{x:Type local:TimeInput}">
+        <Setter Property="Background">
+            <Setter.Value>
+                <ImageBrush ImageSource="/resources/image/TimeSetting/timeinputbg.png"></ImageBrush>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Foreground" Value="White"></Setter>
+        <Setter Property="Width" Value="150"></Setter>
+        <Setter Property="Height" Value="28"></Setter>
+        <Setter Property="BorderBrush" Value="Transparent"></Setter>
+        <Setter Property="FontSize" Value="14"></Setter>
+        <Setter Property="FontWeight" Value="Bold"></Setter>
+        <Setter Property="BorderThickness" Value="0"></Setter>
+        <Setter Property="Cursor" Value="Hand"></Setter>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:TimeInput}">
+                    <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <TextBox x:Name="PART_HOUR" Grid.Column="0" Style="{StaticResource TimeInputTextBox}"></TextBox>
+                            <TextBox x:Name="PART_MINIT" Grid.Column="1" Style="{StaticResource TimeInputTextBox}"></TextBox>
+                            <TextBox x:Name="PART_SECOND" Grid.Column="2" Style="{StaticResource TimeInputTextBox}"></TextBox>
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

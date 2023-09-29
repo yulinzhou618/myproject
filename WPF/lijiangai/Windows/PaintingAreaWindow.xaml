@@ -1,0 +1,124 @@
+﻿<Window x:Class="AIVisualwfpnew.Windows.PaintingAreaWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AIVisualwfpnew.Windows"
+        xmlns:at="clr-namespace:AIVisualwfpnew.resources"
+        at:AttachPropertys.HasResetBtn="False"
+        at:AttachPropertys.HasMiniBtn="False"
+        Style="{StaticResource winbase}"
+        mc:Ignorable="d" Icon="/resources/image/paintingarea/icon.png"
+        Title="入侵区域画线">
+    <Window.Resources>
+        <local:PaintingBtnCheckedConverter x:Key="btnCheckedCT"></local:PaintingBtnCheckedConverter>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="67"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="64"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <StackPanel Orientation="Horizontal" Margin="30,0,0,0">
+                <Rectangle Width="4" Height="32" Fill="#2ED5FF" Stroke="#2ED5FF" VerticalAlignment="Center"></Rectangle>
+                <TextBlock Margin="10,0,0,0" Text="相机" VerticalAlignment="Center"></TextBlock>
+            </StackPanel>
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,30,0">
+                <TextBlock Text="{Binding Path=DateNow,RelativeSource={RelativeSource Mode=FindAncestor,AncestorLevel=1,AncestorType=Window},StringFormat='{}{0:yyy年MM月dd日}'}"></TextBlock>
+                <TextBlock Text="{Binding Path=SelectedAreaName,RelativeSource={RelativeSource Mode=FindAncestor,AncestorLevel=1,AncestorType=Window}}"></TextBlock>
+            </StackPanel>
+        </Grid>
+        <Border Grid.Row="1" Background="Transparent" BorderBrush="#144567" BorderThickness="1" Margin="30,0">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="64"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="133"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="133"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.Column="0" Style="{StaticResource ImageButton}" at:AttachPropertys.Image="/resources/image/paintingarea/left.png" Width="68" Height="68" VerticalAlignment="Center" HorizontalAlignment="Center" Command="{Binding LeftBtnClickCommand,RelativeSource={RelativeSource AncestorLevel=1,Mode=FindAncestor,AncestorType=Window}}"></Button>
+                    <Border Grid.Column="1" Background="Black" BorderBrush="#144567" BorderThickness="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,20">
+                        <Grid>
+                            <Image x:Name="img" Source="{Binding Path=Image,RelativeSource={RelativeSource AncestorLevel=1,Mode=FindAncestor,AncestorType={x:Type Window}}}" Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            <Canvas x:Name="canv" IsEnabled="{Binding Path=IsPainting,RelativeSource={RelativeSource AncestorLevel=1,Mode=FindAncestor,AncestorType=Window}}" Background="Transparent" Width="{Binding Path=ActualWidth,ElementName=img}" Height="{Binding Path=ActualHeight,ElementName=img}" HorizontalAlignment="Center" VerticalAlignment="Center" MouseLeftButtonDown="canv_MouseLeftButtonDown" MouseMove="canv_MouseMove"/>
+                        </Grid>
+                    </Border>
+                    <Button Grid.Column="2" Style="{StaticResource ImageButton}" at:AttachPropertys.Image="/resources/image/paintingarea/right.png" Width="68" Height="68" VerticalAlignment="Center" HorizontalAlignment="Center" Command="{Binding RightBtnClickCommand,RelativeSource={RelativeSource AncestorLevel=1,Mode=FindAncestor,AncestorType=Window}}"></Button>
+                </Grid>
+                <Border Grid.Row="1" Background="#0B1836" BorderBrush="#144567" BorderThickness="1">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <TextBlock Text="轮对棚：" Margin="10,0" VerticalAlignment="Center"></TextBlock>
+                            <Button Content="左侧" Margin="10,0" Style="{StaticResource CheckedButtonStyle}" local:PaintingAreaWindow.BtnAreaName="轮对棚左侧区域" local:PaintingAreaWindow.BtnOrderIndex="0" Command="{Binding Path=PositionBtnClickCommand,RelativeSource={RelativeSource AncestorLevel=1,Mode=FindAncestor,AncestorType=Window}}" CommandParameter="{Binding (local:PaintingAreaWindow.BtnOrderIndex),RelativeSource={RelativeSource Self}}">
+                                <at:AttachPropertys.IsChecked>
+                                    <MultiBinding Converter="{StaticResource btnCheckedCT}">
+                                        <Binding Path="(local:PaintingAreaWindow.BtnOrderIndex)" RelativeSource="{RelativeSource Self}"></Binding>
+                                        <Binding Path="CurrentOrderIndex" RelativeSource="{RelativeSource Mode=FindAncestor,AncestorLevel=1,AncestorType=Window}"></Binding>
+                                    </MultiBinding>
+                                </at:AttachPropertys.IsChecked>
+                            </Button>
+                            <Button Content="中间" Margin="10,0" Style="{StaticResource CheckedButtonStyle}" local:PaintingAreaWindow.BtnAreaName="轮对棚中间区域" local:PaintingAreaWindow.BtnOrderIndex="1" Command="{Binding Path=PositionBtnClickCommand,RelativeSource={RelativeSource AncestorLevel=1,Mode=FindAncestor,AncestorType=Window}}" CommandParameter="{Binding (local:PaintingAreaWindow.BtnOrderIndex),RelativeSource={RelativeSource Self}}">
+                                <at:AttachPropertys.IsChecked>
+                                    <MultiBinding Converter="{StaticResource btnCheckedCT}">
+                                        <Binding Path="(local:PaintingAreaWindow.BtnOrderIndex)" RelativeSource="{RelativeSource Self}"></Binding>
+                                        <Binding Path="CurrentOrderIndex" RelativeSource="{RelativeSource Mode=FindAncestor,AncestorLevel=1,AncestorType=Window}"></Binding>
+                                    </MultiBinding>
+                                </at:AttachPropertys.IsChecked>
+                            </Button>
+                            <Button Content="右侧" Margin="10,0" Style="{StaticResource CheckedButtonStyle}" local:PaintingAreaWindow.BtnAreaName="轮对棚右侧区域" local:PaintingAreaWindow.BtnOrderIndex="2" Command="{Binding Path=PositionBtnClickCommand,RelativeSource={RelativeSource AncestorLevel=1,Mode=FindAncestor,AncestorType=Window}}" CommandParameter="{Binding (local:PaintingAreaWindow.BtnOrderIndex),RelativeSource={RelativeSource Self}}">
+                                <at:AttachPropertys.IsChecked>
+                                    <MultiBinding Converter="{StaticResource btnCheckedCT}">
+                                        <Binding Path="(local:PaintingAreaWindow.BtnOrderIndex)" RelativeSource="{RelativeSource Self}"></Binding>
+                                        <Binding Path="CurrentOrderIndex" RelativeSource="{RelativeSource Mode=FindAncestor,AncestorLevel=1,AncestorType=Window}"></Binding>
+                                    </MultiBinding>
+                                </at:AttachPropertys.IsChecked>
+                            </Button>
+                        </StackPanel>
+                        <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <TextBlock Text="出入段：" Margin="10,0" VerticalAlignment="Center"></TextBlock>
+                            <Button Content="左侧" Margin="10,0" Style="{StaticResource CheckedButtonStyle}" local:PaintingAreaWindow.BtnAreaName="出入段左侧区域" local:PaintingAreaWindow.BtnOrderIndex="3" Command="{Binding Path=PositionBtnClickCommand,RelativeSource={RelativeSource AncestorLevel=1,Mode=FindAncestor,AncestorType=Window}}" CommandParameter="{Binding (local:PaintingAreaWindow.BtnOrderIndex),RelativeSource={RelativeSource Self}}">
+                                <at:AttachPropertys.IsChecked>
+                                    <MultiBinding Converter="{StaticResource btnCheckedCT}">
+                                        <Binding Path="(local:PaintingAreaWindow.BtnOrderIndex)" RelativeSource="{RelativeSource Self}"></Binding>
+                                        <Binding Path="CurrentOrderIndex" RelativeSource="{RelativeSource Mode=FindAncestor,AncestorLevel=1,AncestorType=Window}"></Binding>
+                                    </MultiBinding>
+                                </at:AttachPropertys.IsChecked>
+                            </Button>
+                            <Button Content="中间" Margin="10,0" Style="{StaticResource CheckedButtonStyle}" local:PaintingAreaWindow.BtnAreaName="出入段中间区域" local:PaintingAreaWindow.BtnOrderIndex="4" Command="{Binding Path=PositionBtnClickCommand,RelativeSource={RelativeSource AncestorLevel=1,Mode=FindAncestor,AncestorType=Window}}" CommandParameter="{Binding (local:PaintingAreaWindow.BtnOrderIndex),RelativeSource={RelativeSource Self}}">
+                                <at:AttachPropertys.IsChecked>
+                                    <MultiBinding Converter="{StaticResource btnCheckedCT}">
+                                        <Binding Path="(local:PaintingAreaWindow.BtnOrderIndex)" RelativeSource="{RelativeSource Self}"></Binding>
+                                        <Binding Path="CurrentOrderIndex" RelativeSource="{RelativeSource Mode=FindAncestor,AncestorLevel=1,AncestorType=Window}"></Binding>
+                                    </MultiBinding>
+                                </at:AttachPropertys.IsChecked>
+                            </Button>
+                            <Button Content="右侧" Margin="10,0" Style="{StaticResource CheckedButtonStyle}" local:PaintingAreaWindow.BtnAreaName="出入段右侧区域" local:PaintingAreaWindow.BtnOrderIndex="5" Command="{Binding Path=PositionBtnClickCommand,RelativeSource={RelativeSource AncestorLevel=1,Mode=FindAncestor,AncestorType=Window}}" CommandParameter="{Binding (local:PaintingAreaWindow.BtnOrderIndex),RelativeSource={RelativeSource Self}}">
+                                <at:AttachPropertys.IsChecked>
+                                    <MultiBinding Converter="{StaticResource btnCheckedCT}">
+                                        <Binding Path="(local:PaintingAreaWindow.BtnOrderIndex)" RelativeSource="{RelativeSource Self}"></Binding>
+                                        <Binding Path="CurrentOrderIndex" RelativeSource="{RelativeSource Mode=FindAncestor,AncestorLevel=1,AncestorType=Window}"></Binding>
+                                    </MultiBinding>
+                                </at:AttachPropertys.IsChecked>
+                            </Button>
+                        </StackPanel>
+                    </Grid>
+                </Border>
+            </Grid>
+        </Border>
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Button Content="{Binding Path=PaintBtnContent,RelativeSource={RelativeSource AncestorLevel=1,Mode=FindAncestor,AncestorType=Window}}" Style="{StaticResource PrimeButton}" Command="{Binding StartPaintCommand,RelativeSource={RelativeSource AncestorLevel=1,Mode=FindAncestor,AncestorType=Window}}"></Button>
+            <Button Content="清 除" Style="{StaticResource NagetiveButton}" Margin="20,0,0,0" Command="{Binding Path=RepaintCommand,RelativeSource={RelativeSource AncestorLevel=1,Mode=FindAncestor,AncestorType=Window}}"></Button>
+            <Button Content="保 存" Style="{StaticResource NagetiveButton}" Margin="20,0,0,0" Command="{Binding Path=SaveCommand,RelativeSource={RelativeSource AncestorLevel=1,Mode=FindAncestor,AncestorType=Window}}"></Button>
+        </StackPanel>
+    </Grid>
+</Window>
